@@ -20,7 +20,8 @@
 </script>
 
 <style scoped>
-    .navbar {
+    .navbar 
+    {
         display: flex;
         align-items: center; /* This centers items vertically */
         justify-content: center; /* This centers items horizontally */
@@ -29,21 +30,25 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    .logo, .nav-links {
+    .logo, .nav-links 
+    {
         margin: 0 15px; /* This adds space between the logo, and navigation links */
     }
 
 
-    .logo img {
+    .logo img 
+    {
         height: 30px;
     }
 
-    .nav-links {
+    .nav-links 
+    {
         display: flex;
         gap: 10px;
     }
 
-    .nav-links a {
+    .nav-links a 
+    {
         text-decoration: none;
         color: #333;
         margin: 0 5px;
@@ -51,7 +56,8 @@
         transition: background-color 0.2s;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover 
+    {
         background-color: #f5f5f5;
     }
 </style>

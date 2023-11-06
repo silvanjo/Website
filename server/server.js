@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+const mongoose = require('./database.js');
+
 const PORT = 3000;
 const distPath = path.join(__dirname, '../dist');
 

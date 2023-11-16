@@ -16,6 +16,10 @@ const blogPostSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  previewImage: {
+    type: String,
+    required: false
   }
 });
 

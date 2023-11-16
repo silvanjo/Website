@@ -6,8 +6,18 @@
     
 </template>
 
-<style scoped>
+<style>
+    html, body, div
+    {
+        margin: 0;
+        padding: 0;
+    }
 
+    body 
+    {
+        font-family: 'Roboto', sans-serif;
+        background-color: lightgray;
+    }
 </style>
 
 <script setup>

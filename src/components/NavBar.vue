@@ -25,7 +25,10 @@
         display: flex;
         align-items: center; /* This centers items vertically */
         justify-content: center; /* This centers items horizontally */
+        
         padding: 10px 20px;
+        margin: 0px;
+        height: 70px;
         background-color: #fff;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }

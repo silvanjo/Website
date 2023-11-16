@@ -1,22 +1,20 @@
 <template>
 
-    <div>
+    <div class="blog-post-preview-list">
 
-      <h1>Blog Posts</h1>
+      <h1 class="blog-post-view-title">Blog Posts</h1>
 
-      <div v-for="post in blogPosts" :key="post._id">
+      <div class="blog-post-preview" v-for="post in blogPosts" :key="post._id">
 
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.content }}</p>
-
-        <small>Author: {{ post.author }}</small>
+        <h2 class="blog-post-preview-title">{{ post.title }}</h2>
+        <p class="blog-post-preview-content">{{ post.content }}</p>
 
       </div>
 
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
 
     export default 
     {
@@ -42,8 +40,48 @@
         }
     };
 
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
 
-  </style>
+    .blog-post-preview-list 
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        max-width: 900px;   
+        margin: 40px auto; 
+        padding: 0 20px; 
+        
+        background-color: white;
+
+        /* background-color: lightblue; */
+    }
+
+    .blog-post-preview
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+
+        padding: 20px;
+        max-width: 550px;
+
+        /* Add a border between posts */
+        border-bottom: 1px solid #ccc;
+        /* Smooth transition for background color */
+        transition: background-color 0.3s; 
+
+        /* background-color: lightgreen; */
+    }
+
+    .blog-post-preview:hover 
+    {
+        /* Subtle color change on hover */
+        background-color: #f0f0f0; 
+    }
+
+</style>

@@ -6,10 +6,9 @@
 
       <div v-for="post in blogPosts" :key="post._id">
 
-        <p>Found Blog Post</p>
-
         <h2>{{ post.title }}</h2>
         <p>{{ post.content }}</p>
+
         <small>Author: {{ post.author }}</small>
 
       </div>
@@ -21,13 +20,11 @@
 
     export default 
     {
-        data() 
-        {
-            return 
-            {   
-                blogPosts: []
-            };
-        },
+        data() {
+        return {
+            blogPosts: []
+        };
+    },
         async mounted() 
         {
             console.log('BlogPostView mounted.');

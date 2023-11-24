@@ -4,7 +4,7 @@
 
       <h1 class="blog-post-view-title">Blog Posts</h1>
 
-      <div class="blog-post-preview" v-for="post in blogPosts" :key="post._id">
+      <div class="blog-post-preview" v-for="post in blogPostsPreviews" :key="post._id">
 
         <h2 class="blog-post-preview-title">{{ post.title }}</h2>
         <p class="blog-post-preview-content">{{ post.content }}</p>
@@ -18,25 +18,32 @@
 
     export default 
     {
-        data() {
+        data() 
+        {
         return {
-            blogPosts: []
+            blogPostsPreviews: []
         };
-    },
+        },
         async mounted() 
         {
-            console.log('BlogPostView mounted.');
-
             try 
             {
                 const response = await fetch('http://localhost:3000/api/blogposts');
-                this.blogPosts = await response.json();
+                let posts = await response.json();
+
+                const previewWordLength = 100;
+                this.blogPostsPreviews = posts.map( post => {
+                    const words = post.content.split(" ");
+                    if (words.length > previewWordLength)
+                        post.content = words.slice(0, previewWordLength).join(" ") + "...";
+                    return post;
+                })
+
+
             } catch (error) 
             {
                 console.error('Error fetching blog posts:', error);
             }
-
-            console.log('Blog posts:', this.blogPosts);
         }
     };
 
@@ -52,7 +59,7 @@
         align-items: center;
         gap: 20px;
 
-        max-width: 900px;   
+        max-width: 1100px;   
         margin: 40px auto; 
         padding: 0 20px; 
         

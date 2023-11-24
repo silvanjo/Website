@@ -2,7 +2,10 @@
 
     <NavBar/>
 
-    <BlogPostView/>
+    <div class="blog-content">
+        <BlogPostView/>
+    </div>
+
     
 </template>
 
@@ -18,6 +21,7 @@
         font-family: 'Roboto', sans-serif;
         background-color: lightgray;
     }
+
 </style>
 
 <script setup>

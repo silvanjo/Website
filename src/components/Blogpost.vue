@@ -1,8 +1,8 @@
 <template>
 
   <div class="blog-entry">
-    <h1>{{ title }}</h1>
-    <p>{{ content }}</p>
+    <h1>{{ this.blogPost.title }}</h1>
+    <p>{{ this.blogPost.content }}</p>
   </div>
 
 </template>
@@ -11,17 +11,34 @@
   
 export default 
 {
+  data() 
+  {
+    return {
+      blogPost: 
+      {
+        title: '',
+        content: ''
+      }
+    };
+  },
   props: 
   {
-    title: 
+    id: 
     {
       type: String,
       required: true
-    },
-    content: 
+    }
+  },
+  async mounted()
+  {
+    try
     {
-      type: String,
-      required: true
+      const response = await fetch(`http://localhost:3000/api/blogposts/${this.id}`);
+      this.blogPost = await response.json();
+    } 
+    catch (error) 
+    {
+      console.error('Error fetching blog post:', error);
     }
   }
 }
@@ -32,24 +49,14 @@ export default
 
 .blog-entry 
 {
-  max-width: 900px;   
+  max-width: 700px;   
   margin: 40px auto; 
   padding: 0 20px;  
-  text-align: center;
 }
 
 .blog-entry h1 
 {
-  font-size: 2em;
   margin-bottom: 20px;
-}
-
-.blog-entry p 
-{
-  text-align: justify;
-  text-justify: inter-word;
-  font-size: 1.2em;
-  line-height: 1.5;
 }
 
 </style>

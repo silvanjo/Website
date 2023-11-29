@@ -2,14 +2,18 @@
 
     <div class="blog-post-preview-list">
 
-      <h1 class="blog-post-view-title">Blog Posts</h1>
 
-      <div class="blog-post-preview" v-for="post in blogPostsPreviews" :key="post._id">
+        <div class="blog-post-preview" v-for="post in blogPostsPreviews" :key="post._id">
+           
+            <router-link :to="{ name: 'BlogPost', params: { id: post._id } }">
 
-        <h2 class="blog-post-preview-title">{{ post.title }}</h2>
-        <p class="blog-post-preview-content">{{ post.content }}</p>
+                <h2 class="blog-post-preview-title">{{ post.title }}</h2>
+                <p class="blog-post-preview-content">{{ post.content }}</p>
 
-      </div>
+            </router-link>
+
+        </div>
+
 
     </div>
 </template>
@@ -62,8 +66,6 @@
         max-width: 1100px;   
         margin: 40px auto; 
         padding: 0 20px; 
-        
-        background-color: white;
 
         /* background-color: lightblue; */
     }
@@ -75,20 +77,18 @@
         gap: 0px;
 
         padding: 20px;
-        max-width: 550px;
+        max-width: 700px;
 
-        /* Add a border between posts */
-        border-bottom: 1px solid #ccc;
+        border-radius: 10px;
+
         /* Smooth transition for background color */
         transition: background-color 0.3s; 
-
-        /* background-color: lightgreen; */
     }
 
     .blog-post-preview:hover 
     {
         /* Subtle color change on hover */
-        background-color: #f0f0f0; 
+        background-color: #464646; 
     }
 
 </style>

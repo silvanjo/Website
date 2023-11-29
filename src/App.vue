@@ -2,10 +2,7 @@
 
     <NavBar/>
 
-    <div class="blog-content">
-        <BlogPostView/>
-    </div>
-
+    <router-view></router-view>
     
 </template>
 
@@ -19,7 +16,35 @@
     body 
     {
         font-family: 'Roboto', sans-serif;
-        background-color: lightgray;
+        background-color: #1d1e1e;
+    }
+
+    a 
+    {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    h1, h2, h3, h4, h5, h6
+    {
+        
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+        font-weight: bold;
+        color: #e2e2e2;
+    }
+
+    h1 
+    {
+        font-size: 2.3em;
+    }
+
+    p 
+    {
+        
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        font-size: 1.1em; 
+        color: #e2e2e2;
+        line-height: 1.8;
     }
 
 </style>

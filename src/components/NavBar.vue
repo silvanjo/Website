@@ -29,7 +29,6 @@
         padding: 10px 20px;
         margin: 0px;
         height: 70px;
-        background-color: #fff;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
@@ -53,14 +52,15 @@
     .nav-links a 
     {
         text-decoration: none;
-        color: #333;
+        color: #e2e2e2;
         margin: 0 5px;
         padding: 5px 10px;
+        border-radius: 5px;
         transition: background-color 0.2s;
     }
 
     .nav-links a:hover 
     {
-        background-color: #f5f5f5;
+        background-color: #464646;
     }
 </style>

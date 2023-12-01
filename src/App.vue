@@ -15,10 +15,12 @@
     {
         --background-color: #1d1e1e;
         --text-color: #e2e2e2;
+        --link-text-color: lightblue;
         --hover-background-color: #464646;
         
         --background-color-light: #fff;
         --text-color-light: #333;
+        --link-text-color-light: #0077cc;
         --hover-background-color-light: #ddd;
     }
 
@@ -26,6 +28,7 @@
     {
         --background-color: var(--background-color-light);
         --text-color: var(--text-color-light);
+        --link-text-color: var(--link-text-color-light);
         --hover-background-color: var(--hover-background-color-light);
     }
 

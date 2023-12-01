@@ -10,6 +10,8 @@
                 <h2 class="blog-post-preview-title">{{ post.title }}</h2>
                 <p class="blog-post-preview-content">{{ post.content }}</p>
 
+                <p class="continue-reading-text">Continue Reading</p>
+
             </router-link>
 
         </div>
@@ -68,6 +70,13 @@
         padding: 0 20px; 
 
         /* background-color: lightblue; */
+    }
+
+    .continue-reading-text
+    {
+        margin-top: 10px;
+        color: var(--link-text-color);
+        text-decoration: underline;
     }
 
     .blog-post-preview

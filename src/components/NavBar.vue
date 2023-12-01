@@ -12,10 +12,22 @@
       <a href="#">Sponsor</a>
       <a href="#">Partners</a>
     </div>
+    <button @click="toggleColorTheme">Light Mode</button>
   </div>
 </template>
 
 <script>
+
+    export default
+    {
+        methods:
+        {
+            toggleColorTheme()
+            {
+                document.body.classList.toggle('light-theme')
+            }
+        }
+    }
 
 </script>
 
@@ -52,7 +64,7 @@
     .nav-links a 
     {
         text-decoration: none;
-        color: #e2e2e2;
+        color: var(--text-color);
         margin: 0 5px;
         padding: 5px 10px;
         border-radius: 5px;
@@ -61,6 +73,6 @@
 
     .nav-links a:hover 
     {
-        background-color: #464646;
+        background-color: var(--hover-background-color);
     }
 </style>

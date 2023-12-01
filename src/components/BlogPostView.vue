@@ -88,7 +88,7 @@
     .blog-post-preview:hover 
     {
         /* Subtle color change on hover */
-        background-color: #464646; 
+        background-color: var(--hover-background-color); 
     }
 
 </style>

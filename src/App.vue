@@ -7,6 +7,29 @@
 </template>
 
 <style>
+
+    /* 
+    Global CSS variables defining colors for dark and light mode
+    */
+    :root 
+    {
+        --background-color: #1d1e1e;
+        --text-color: #e2e2e2;
+        --hover-background-color: #464646;
+        
+        --background-color-light: #fff;
+        --text-color-light: #333;
+        --hover-background-color-light: #ddd;
+    }
+
+    .light-theme 
+    {
+        --background-color: var(--background-color-light);
+        --text-color: var(--text-color-light);
+        --hover-background-color: var(--hover-background-color-light);
+    }
+
+
     html, body, div
     {
         margin: 0;
@@ -16,7 +39,7 @@
     body 
     {
         font-family: 'Roboto', sans-serif;
-        background-color: #1d1e1e;
+        background-color: var(--background-color);
     }
 
     a 
@@ -30,7 +53,7 @@
         
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
         font-weight: bold;
-        color: #e2e2e2;
+        color: var(--text-color);
     }
 
     h1 
@@ -43,7 +66,7 @@
         
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         font-size: 1.1em; 
-        color: #e2e2e2;
+        color: var(--text-color);
         line-height: 1.8;
     }
 

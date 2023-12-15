@@ -78,5 +78,6 @@
 <script setup>
     import NavBar from './components/NavBar.vue'
     import BlogPost from './components/Blogpost.vue'
+    import Editor from './dashboard/Editor.vue'
     import BlogPostView from './components/BlogPostView.vue'
 </script>

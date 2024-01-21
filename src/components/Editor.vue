@@ -25,7 +25,8 @@
 
             this.quill = new Quill(this.$refs.editor, options)
 
-            this.quill.setContents(this.quillDelta)
+            if (this.quillDelta)
+                this.quill.setContents(this.quillDelta)
             
             // Emit the delta whenever the editor changes
             this.quill.on('text-change', () => {

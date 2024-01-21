@@ -4,7 +4,7 @@
     <div v-if="previewMode" id="blog-post-preview-container">
         <BlogPostPreview :quillDelta="quillDeltaProp"></BlogPostPreview>
         <div>
-            <button id="post-button" class="btn btn-primary">Post</button>
+            <button id="post-button" class="btn btn-primary" @click="createPost">Post</button>
             <button id="edit-post-button" class="btn btn-primary" @click="editPost">Edit Post</button>
         </div>
     </div>

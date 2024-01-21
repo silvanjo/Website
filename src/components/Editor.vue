@@ -1,5 +1,5 @@
 <template>
-        <div ref="editor" id="quill-editor-container"></div>
+        <div ref="editor"></div>
 </template>
 
 <script>
@@ -19,6 +19,12 @@
             }
 
             this.quill = new Quill(this.$refs.editor, options)
+
+            // Emit the delta whenever the editor changes
+            this.quill.on('text-change', () => {
+                const delta = this.quill.getContents()
+                this.$emit('updateDelta', delta)
+            })
         },
         methods: {
         }

@@ -5,11 +5,11 @@
         <BlogPostPreview :quillDelta="quillDeltaProp"></BlogPostPreview>
         <div>
             <button id="post-button" class="btn btn-primary">Post</button>
-            <button id="edit-post-button" class="btn btn-primary">Edit Post</button>
+            <button id="edit-post-button" class="btn btn-primary" @click="editPost">Edit Post</button>
         </div>
     </div>
     <div v-else id="editor-container">
-        <Editor @updateDelta="updateDeltaEvent"></Editor>
+        <Editor :quillDelta="quillDeltaProp" @updateDelta="updateDeltaEvent"></Editor>
         <button id="preview-button" class="btn btn-primary" @click="updateDeltaPropEvent">Preview</button>
     </div>
   
@@ -43,6 +43,10 @@
                 this.quillDeltaProp = this.quillDelta;
                 this.previewMode = true;
             },
+
+            editPost() {
+                this.previewMode = false;
+            }
         }
     }
 </script>

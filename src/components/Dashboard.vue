@@ -19,6 +19,8 @@
     import Editor from './Editor.vue';
     import BlogPostPreview from './BlogPostPreview.vue';
 
+    import axios from 'axios';
+
     export default {
         name: 'Dashboard',
         components: {
@@ -27,6 +29,7 @@
         },
         data() {
             return {
+                blogPostTitle: '',
                 quillDelta: null,
                 quillDeltaProp: null,
                 previewMode: false  // When in preview mode, render the BlogPostPreview.vue component
@@ -46,7 +49,49 @@
 
             editPost() {
                 this.previewMode = false;
-            }
+            },
+
+            /*
+             * This function goes through the delta object of the quill editor and sets the first
+             * H1 element as the title of the blog post.
+             */
+            extractBlogPostHeader() {
+                let title = '';
+
+                let prevOps = null;
+                this.quillDelta.ops.some(op => {
+                    if (op.attributes && op.attributes.header === 1) {
+                        title = prevOps.insert;
+                        return true;
+                    }
+                    prevOps = op;
+                });
+
+                if (title === '') {
+                    title = 'Untitled';
+                }
+
+                return title;
+            },
+
+            createPost() {
+                this.blogPostTitle = this.extractBlogPostHeader();
+
+                const postData = {
+                    title: this.blogPostTitle,
+                    content: this.quillDelta,
+                    author: "John Doe",
+                }
+
+                axios.post('http://localhost:3000/api/blogposts', postData)
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+            },
         }
     }
 </script>

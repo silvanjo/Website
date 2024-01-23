@@ -1,21 +1,21 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const mongoose = require('./database');
 
 const BlogPost = require('./models/BlogPost');
 
 const PORT = 3000;
-const distPath = path.join(__dirname, '../dist');
 
 const app = express();
 
+// Middleware to allow cross-origin requests to specified host
+app.use(cors({ origin: 'http://localhost:5173' }));
+
 // Middleware to parse JSON requests
 app.use(bodyParser.json());
-
-// Serve static files from the Vue app (assuming a "dist" folder)
-app.use(express.static(distPath));
 
 app.get('/api/blogposts/:id', async (req, res) => {
   console.log('Getting a blogpost: ' + req.params.id)
@@ -55,6 +55,7 @@ app.post('/api/blogposts', async (req, res) => {
       content: req.body.content,
       author: req.body.author
     });
+
     const savedPost = await newPost.save();
     res.status(201).json(savedPost);
   } catch (error) {

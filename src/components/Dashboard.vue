@@ -85,10 +85,12 @@
 
                 axios.post('http://localhost:3000/api/blogposts', postData)
                     .then(response => {
-                        console.log(response);
+                        const data = response.data;
+                        const postID = data._id;
+                        this.$router.push({ name: 'BlogPost', params: { id: postID } });
                     })
                     .catch(error => {
-                        console.log(error);
+                        console.log(error)
                     });
 
             },

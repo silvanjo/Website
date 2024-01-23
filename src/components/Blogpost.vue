@@ -1,24 +1,20 @@
 <template>
 
-  <div class="blog-entry">
-    <h1>{{ this.blogPost.title }}</h1>
-    <p>{{ this.blogPost.content }}</p>
-  </div>
+<div class="blog-entry" ref="blog_post_preview_area"></div>
 
 </template>
 
 <script>
+import Quill from 'quill'
+import 'quill/dist/quill.snow.css'
   
 export default 
 {
   data() 
   {
     return {
-      blogPost: 
-      {
-        title: '',
-        content: ''
-      }
+      // Display are for the blog post that is an delta object that can be displayed by Quill
+      quillDisplayArea: null,
     };
   },
   props: 
@@ -34,7 +30,16 @@ export default
     try
     {
       const response = await fetch(`http://localhost:3000/api/blogposts/${this.id}`);
-      this.blogPost = await response.json();
+      let post = await response.json();
+
+      let options = 
+      {
+        theme: 'bubble',
+        readOnly: true
+      }
+
+      this.quillDisplayArea = new Quill(this.$refs.blog_post_preview_area, options)
+      this.quillDisplayArea.setContents(post.content)
     } 
     catch (error) 
     {
@@ -49,14 +54,9 @@ export default
 
 .blog-entry 
 {
-  max-width: 700px;   
+  max-width: 800px;   
   margin: 40px auto; 
   padding: 0 20px;  
-}
-
-.blog-entry h1 
-{
-  margin-bottom: 20px;
 }
 
 </style>

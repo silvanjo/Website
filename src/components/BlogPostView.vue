@@ -39,9 +39,8 @@
 
                 const previewWordLength = 100;
                 this.blogPostsPreviews = posts.map( post => {
-                    const words = post.content.split(" ");
-                    if (words.length > previewWordLength)
-                        post.content = words.slice(0, previewWordLength).join(" ") + "...";
+                    const delta = post.content;
+                    post.content = this.extractTextFromDelta(delta);
                     return post;
                 })
 
@@ -49,6 +48,26 @@
             } catch (error) 
             {
                 console.error('Error fetching blog posts:', error);
+            }
+        },
+        methods: 
+        {
+            // Since the content of the blog post is a delta object, we need to extract the text from it
+            // This function extracts the first 100 characters from the delta object
+            extractTextFromDelta(delta)
+            {
+                let text = '';
+
+                delta.ops.forEach(op => {
+                    if (op.insert)
+                        text += op.insert;
+
+                    if (text.length > 100)
+                        return text.slice(0, 100) + "...";
+                });
+
+                return text;
+            
             }
         }
     };

@@ -2,7 +2,6 @@
 
     <div class="blog-post-preview-list">
 
-
         <div class="blog-post-preview" v-for="post in blogPostsPreviews" :key="post._id">
            
             <router-link :to="{ name: 'BlogPost', params: { id: post._id } }">
@@ -27,6 +26,7 @@
         data() 
         {
         return {
+            previewCharacterCount: 400,
             blogPostsPreviews: []
         };
         },
@@ -37,7 +37,6 @@
                 const response = await fetch('http://localhost:3000/api/blogposts');
                 let posts = await response.json();
 
-                const previewWordLength = 100;
                 this.blogPostsPreviews = posts.map( post => {
                     const delta = post.content;
                     post.content = this.extractTextFromDelta(delta);
@@ -53,21 +52,21 @@
         methods: 
         {
             // Since the content of the blog post is a delta object, we need to extract the text from it
-            // This function extracts the first 100 characters from the delta object
+            // This function extracts the first previewCharacterCount characters from the delta object
             extractTextFromDelta(delta)
             {
                 let text = '';
 
-                delta.ops.forEach(op => {
+                for (const op of delta.ops)
+                {
                     if (op.insert)
                         text += op.insert;
 
-                    if (text.length > 100)
-                        return text.slice(0, 100) + "...";
-                });
+                    if (text.length > this.previewCharacterCount)
+                        return text + '...';
+                }
 
                 return text;
-            
             }
         }
     };
@@ -91,13 +90,6 @@
         /* background-color: lightblue; */
     }
 
-    .continue-reading-text
-    {
-        margin-top: 10px;
-        color: var(--link-text-color);
-        text-decoration: underline;
-    }
-
     .blog-post-preview
     {
         display: flex;
@@ -112,6 +104,14 @@
         /* Smooth transition for background color */
         transition: background-color 0.3s; 
     }
+
+    .continue-reading-text
+    {
+        margin-top: 10px;
+        color: var(--link-text-color);
+        text-decoration: underline;
+    }
+
 
     .blog-post-preview:hover 
     {

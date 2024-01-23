@@ -97,7 +97,7 @@
         gap: 0px;
 
         padding: 20px;
-        max-width: 700px;
+        width: 700px;
 
         border-radius: 10px;
 

@@ -26,7 +26,7 @@
         data() 
         {
         return {
-            previewCharacterCount: 400,
+            previewCharacterCount: 450,
             blogPostsPreviews: []
         };
         },

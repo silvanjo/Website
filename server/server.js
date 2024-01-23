@@ -18,8 +18,6 @@ app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(bodyParser.json());
 
 app.get('/api/blogposts/:id', async (req, res) => {
-  console.log('Getting a blogpost: ' + req.params.id)
-
   try {
     const blogPost = await BlogPost.findById(req.params.id);
 
@@ -35,8 +33,6 @@ app.get('/api/blogposts/:id', async (req, res) => {
 
 // API route for blog posts
 app.get('/api/blogposts', async (req, res) => {
-  console.log('Getting all blogposts')
-
   try {
     const posts = await BlogPost.find();
     res.json(posts);
@@ -47,8 +43,6 @@ app.get('/api/blogposts', async (req, res) => {
 
 // API route for creating a blog post
 app.post('/api/blogposts', async (req, res) => {
-  console.log('Posting a new blogpost')
-
   try {
     const newPost = new BlogPost({
       title: req.body.title,
@@ -65,8 +59,6 @@ app.post('/api/blogposts', async (req, res) => {
 
 // API route for updating a blog post
 app.patch('/api/blogposts/:id', async (req, res) => {
-  console.log('Patching a blog post')
-
   try {
       const postId = req.params.id;
 
@@ -86,6 +78,28 @@ app.patch('/api/blogposts/:id', async (req, res) => {
 
       // Saves the post in the database
       await blogPost.save();
+
+      res.json(blogPost);
+  } catch (error) {
+      res.status(500).send(error);
+  }
+});
+
+// API route for deleting a blog post
+app.delete('/api/blogposts/:id', async (req, res) => {
+  try {
+      const postId = req.params.id;
+
+      // Finds the post by id 
+      const blogPost = await BlogPost.findById(postId);
+
+      // If the post is not found, return a 404 error
+      if (!blogPost) {
+          return res.status(404).send('Blog post not found');
+      }
+
+      // Deletes the post from the database
+      await blogPost.delete();
 
       res.json(blogPost);
   } catch (error) {

@@ -61,14 +61,14 @@
 
     h1 
     {
-        font-size: 2.3em;
+        font-size: 1.5em;
     }
 
     p 
     {
         
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        font-size: 1.1em; 
+        font-size: 1em; 
         color: var(--text-color);
         line-height: 1.8;
     }

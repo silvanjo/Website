@@ -2,15 +2,15 @@
 
     <!-- If previewMode is set render BlogPostPreview.vue component, otherwise render Editor.vue component -->
     <div v-if="previewMode" id="blog-post-preview-container">
-        <BlogPostPreview :quillDelta="quillDeltaProp"></BlogPostPreview>
+        <BlogPostPreview :blogPostHTML="blogPostHTML"></BlogPostPreview>
         <div>
             <button id="post-button" class="btn btn-primary" @click="createPost">Post</button>
             <button id="edit-post-button" class="btn btn-primary" @click="editPost">Edit Post</button>
         </div>
     </div>
     <div v-else id="editor-container">
-        <Editor :quillDelta="quillDeltaProp" @updateDelta="updateDeltaEvent"></Editor>
-        <button id="preview-button" class="btn btn-primary" @click="updateDeltaPropEvent">Preview</button>
+        <Editor @updateBlogPostHTML="updateBlogPostHTML"></Editor>
+        <button id="preview-button" class="btn btn-primary" @click="enterPreviewMode">Preview</button>
     </div>
   
 </template>
@@ -30,20 +30,19 @@
         data() {
             return {
                 blogPostTitle: '',
-                quillDelta: null,
-                quillDeltaProp: null,
+                blogPostHTML: '',
                 previewMode: false  // When in preview mode, render the BlogPostPreview.vue component
             }
         },
         mounted() {
+
         },
         methods: {
-            updateDeltaEvent(delta) {
-                this.quillDelta = delta;
+            updateBlogPostHTML(blogPostHTML) {
+                this.blogPostHTML = blogPostHTML;
             },
 
-            updateDeltaPropEvent() {
-                this.quillDeltaProp = this.quillDelta;
+            enterPreviewMode() {
                 this.previewMode = true;
             },
 
@@ -51,25 +50,10 @@
                 this.previewMode = false;
             },
 
-            /*
-             * This function goes through the delta object of the quill editor and sets the first
-             * H1 element as the title of the blog post.
-             */
             extractBlogPostHeader() {
-                let title = '';
+                let title = 'Undefined';
 
-                let prevOps = null;
-                this.quillDelta.ops.some(op => {
-                    if (op.attributes && op.attributes.header === 1) {
-                        title = prevOps.insert;
-                        return true;
-                    }
-                    prevOps = op;
-                });
-
-                if (title === '') {
-                    title = 'Untitled';
-                }
+                // TODO: Extract title from this.blogPostHTML
 
                 return title;
             },
@@ -79,7 +63,7 @@
 
                 const postData = {
                     title: this.blogPostTitle,
-                    content: this.quillDelta,
+                    content: this.blogPostHTML,
                     author: "John Doe",
                 }
 

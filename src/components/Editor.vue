@@ -13,11 +13,6 @@
                 quill: null
             }
         },
-        props: {
-            quillDelta: {
-                type: Object
-            }
-        },
         mounted() {
             let toolbarOptions = [
                 ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -47,25 +42,17 @@
             }
 
             this.quill = new Quill(this.$refs.editor, options)
-
-            if (this.quillDelta)
-                this.quill.setContents(this.quillDelta)
             
             // Emit the delta whenever the editor changes
             this.quill.on('text-change', () => {
-                const delta = this.quill.getContents()
-                this.$emit('updateDelta', delta)
+                const blogPostHTML = this.quill.root.innerHTML
+                this.$emit('updateBlogPostHTML', blogPostHTML)
             })
             
         },
         methods: {
+
         },
-        wacht: {
-            quillDelta() {
-                console.log('quillDelta changed')
-                this.quill.setContents(this.quillDelta)
-            }
-        }
     }
 </script>
 

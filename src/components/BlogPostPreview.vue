@@ -1,5 +1,5 @@
 <template>
-    <div ref="blog_post_preview_area"></div>
+    <div v-html="blogPostHTML"></div>
 </template>
 
 <script>
@@ -9,35 +9,22 @@
     export default {
         name: 'BlogPostPreview',
         props: {
-            quillDelta: {
-                type: Object
+            blogPostHTML: {
+                type: String
             }
         },
         data() {
             return {
-                quillDisplayArea: null,
+                
             }
         },
         mounted() {
-            let options = {
-                theme: 'bubble',
-                readOnly: true
-            }
-
-            this.quillDisplayArea = new Quill(this.$refs.blog_post_preview_area, options)
-            this.quillDisplayArea.setContents(this.quillDelta)
+            // Convert the Quill delta object to HTML
+            
         },
         methods: {
-            updateDisplayArea() {
-                this.quillDisplayArea.setContents(this.quillDelta)
-            }
+            
         },
-        watch: {
-            quillDelta() {
-                console.log('quillDelta changed')
-                this.updateDisplayArea()
-            }
-        }
     }
 </script>
 

@@ -5,8 +5,9 @@ const blogPostSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  /* The content is the blog post as HTML */
   content: {
-    type: Object,
+    type: String,
     required: true
   },
   author: {

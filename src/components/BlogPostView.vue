@@ -7,7 +7,7 @@
             <router-link :to="{ name: 'BlogPost', params: { id: post._id } }">
 
                 <h2 class="blog-post-preview-title">{{ post.title }}</h2>
-                <p class="blog-post-preview-content">{{ post.content }}</p>
+                <div v-html="post.content"></div>
 
                 <p class="continue-reading-text">Continue Reading</p>
 
@@ -38,8 +38,10 @@
                 let posts = await response.json();
 
                 this.blogPostsPreviews = posts.map( post => {
-                    const delta = post.content;
-                    post.content = this.extractTextFromDelta(delta);
+                    const blogPostHTML = post.content;
+                    
+                    // TODO: Cull posts to 100 words
+
                     return post;
                 })
 
@@ -51,23 +53,7 @@
         },
         methods: 
         {
-            // Since the content of the blog post is a delta object, we need to extract the text from it
-            // This function extracts the first previewCharacterCount characters from the delta object
-            extractTextFromDelta(delta)
-            {
-                let text = '';
-
-                for (const op of delta.ops)
-                {
-                    if (op.insert)
-                        text += op.insert;
-
-                    if (text.length > this.previewCharacterCount)
-                        return text + '...';
-                }
-
-                return text;
-            }
+            
         }
     };
 
